@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration name="Config" status="ALL" monitorInterval="5">
+    <Properties>
+        <Property name="LOG_PATTERN">%d{DEFAULT} [%t] [%C] %level - %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <RollingFile name="fileLogger" filename="logs/logs.txt" filePattern="logs/%d{yyyy-MM-dd}-%i-logs.txt.zip">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="ALL">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="fileLogger"/>
+        </Root>
+    </Loggers>
+</Configuration>
